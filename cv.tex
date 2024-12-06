@@ -13,20 +13,21 @@
 \newcommand{\Yangtz}{Yangtze University}
 
 % Identifying information
-\newcommand{\Title}{Resume}
+\newcommand{\Title}{CV}
 \newcommand{\FirstName}{Daopu}
 \newcommand{\LastName}{Wang}
 \newcommand{\Initials}{D}
 \newcommand{\MyName}{ \FirstName\ \LastName}
-\newcommand{\Me}{\underline{\Initials. \LastName}}  % For citations
-\newcommand{\Email}{12232679@mail.sustech.edu.cn}
-\newcommand{\PersonalWebsite}{lethalkiss.github.io/}
-\newcommand{\LabWebsite}{http://sustech-gem.cn/Home}
+% \newcommand{\Me}{\underline{\Initials. \LastName}}  % For citations
+\newcommand{\Me}{\underline{\FirstName\  \LastName}}
+\newcommand{\Email}{daopuwang77@gmail.com}
+\newcommand{\PersonalWebsite}{vianwan.github.io/}
+% \newcommand{\LabWebsite}{lethalkiss.github.io/}
 % \newcommand{\ORCID}{}
 
 % Names for citing coauthors
-\newcommand{\DikunYang}{D. Yang}
-\newcommand{\Zhengtao}{Z. Yang}
+\newcommand{\DikunYang}{Dikun Yang}
+\newcommand{\Zhentao}{Zhentao Yang}
 
 
 % Load packages
@@ -82,6 +83,9 @@
 % Control PDF metadata and links
 \usepackage[colorlinks=true]{hyperref}
 
+% Custom
+\usepackage{xparse}
+\usepackage{stackengine}
 
 % Template configuration
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -100,7 +104,9 @@
 \definecolor{lightgray}{gray}{0.9}
 \definecolor{mediumblue}{HTML}{2060c2}
 \definecolor{lightblue}{HTML}{a0c3ff}
-
+\definecolor{pink}{HTML}{AA5486}
+\definecolor{purple}{HTML}{4335A7}
+\definecolor{dred}{HTML}{AB4459}
 % No indentation
 \setlength\parindent{0cm}
 
@@ -133,10 +139,18 @@
 
 % Define a new environment to place all CV entries in a 2-column table.
 % Left column are the dates, right column the entries.
+% \NewEnviron{EntriesTableDuration}{
+% \TablePad
+% \begin{tabularx}{\textwidth}{@{}p{0.01\textwidth}@{\hspace{0.02\textwidth}}p{0.97\textwidth}@{}}
+%   \BODY
+% \end{tabularx}
+% \TablePad
+% }
+% Define EntriesTableDuration new enviroment
 \newcommand{\TablePad}{\vspace{-0.2cm}}
 \NewEnviron{EntriesTableDuration}{
 \TablePad
-\begin{tabularx}{\textwidth}{@{}p{0.10\textwidth}@{\hspace{0.02\textwidth}}p{0.88\textwidth}@{}}
+\begin{tabularx}{\textwidth}{@{}p{0.08\textwidth}@{\hspace{0.02\textwidth}}p{0.90\textwidth}@{}}
   \BODY
 \end{tabularx}
 \TablePad
@@ -155,16 +169,34 @@
   \end{tabularx}
   \TablePad
 }
-
-
+\NewEnviron{EntriesDate}{
+  \TablePad
+  \begin{tabularx}{\textwidth}{@{}p{0.08\textwidth}@{\hspace{0.01\textwidth}}p{0.91\textwidth}@{}}
+    \BODY
+  \end{tabularx}
+  \TablePad
+}
+\NewEnviron{EntriesTableDurationBack}{
+  \TablePad
+  \begin{tabularx}{\textwidth}{@{}p{0.0\textwidth}@{\hspace{0.01\textwidth}}p{0.99\textwidth}@{}}
+    \BODY
+  \end{tabularx}
+  \TablePad
+}
 % Macros to set the year and duration on the left column
-\newcommand{\Duration}[2]{\fontsize{10pt}{0}\selectfont \texttt{#1-#2}}
+% \newcommand{\Duration}[2]{\fontsize{10pt}{0}\selectfont \texttt{#1-#2}}
+\newcommand{\Duration}[2]{%
+  \fontsize{10pt}{12pt}\selectfont
+  \Shortunderstack[c]{\texttt{#1} $\downarrow$ \texttt{#2}}
+}
 \newcommand{\Year}[1]{\fontsize{10pt}{0}\selectfont \texttt{#1}}
 \newcommand{\Colon}[1]{\fontsize{10pt}{0}\selectfont \texttt{#1:}}
+\newcommand{\OColon}[1]{\fontsize{10pt}{0}\selectfont \texttt{#1}}
 \newcommand{\Month}[2]{\fontsize{10pt}{0}\selectfont \texttt{#1 #2}}
 \newcommand{\Ongoing}{on}
 \newcommand{\Future}{future}
 \newcommand{\replacehyphenwithcolon}[1]{\StrSubstitute{#1}{-}{:}}
+\newcommand{\FixedRightSpace}[1]{\hfill\makebox[7em][l]{#1}}
 
 % Macros to add links and mark publications
 \newcommand{\DOI}[1]{doi:\href{https://doi.org/#1}{#1}}
@@ -210,7 +242,7 @@
 \begin{document}
 
 \begin{minipage}[t]{0.5\textwidth}
-  {\fontsize{20pt}{0}\selectfont\MyName}
+  {\fontsize{20pt}{0}\selectfont\textcolor{purple}{\MyName}}
 \end{minipage}
 \begin{minipage}[t]{0.5\textwidth}
   \begin{flushright}
@@ -225,8 +257,8 @@
   Email: \href{mailto:\Email}{\Email}
   \\
   Homepage: \Website{\PersonalWebsite}
-  \\
-  Research Group: \Website{\LabWebsite}
+  % \\
+  % Research Group: \Website{\LabWebsite}
 \end{minipage}
 \begin{minipage}[t]{0.5\textwidth}
   \begin{flushright}
@@ -239,203 +271,194 @@
 \end{minipage}
 \vspace{0.3cm}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \section{Community Service}
+\section{\textcolor{purple}{Educations}}
 
-% \begin{EntriesTableDuration}
-%   \Duration{2022}{\Ongoing} & \textbf{Board Member}, Software Underground, \Website{softwareunderground.org}
-%   \\
-%   \Duration{2024}{\Ongoing} & \textbf{Advisory Council Member}, EarthArXiv, \Website{eartharxiv.org}
-%   \\
-%   \Duration{2022}{2023} & \textbf{Advisory Committee Member}, pyOpenSci, \Website{www.pyopensci.org}
-%   \\
-%   \Duration{2019}{2022} & \textbf{Topic Editor}, Journal of Open Source Software, \Website{joss.theoj.org}
-% \end{EntriesTableDuration}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Educations}
-
-\begin{EntriesTableDuration}
-  \Duration{2022}{2025}  &
-  \textbf{MS in Physics}, \SUSTech, Shenzhen, China.
+\begin{EntriesTableDurationBack}
+  % \Duration{2022.09}{2025.06}  &
+  &
+  \textcolor{pink}{\textbf{MS in Physics}}, \SUSTech, Shenzhen, China.\FixedRightSpace{2022.09 - 2025.06}
   \newline
   GPA: 3.56/4.0
   \newline
-  Concentrations: Advanced Geo-Electromagntism, Computational Geophysics, Geophysical Inverse Problem 
+  Courses: Advanced Geo-Electromagntism, Computational Geophysics, Geophysical Inverse Problem.
+  \newline
+  Thesis: Electric resistivity tomography guided by seismic information and its application in karst cavities;
+  \newline
+  Advisor: \DikunYang.
   \\
-  \Duration{2018}{2022}  &
-  \textbf{BS in Geophysics}, \Yangtz, Wuhan, China.
+  % \Duration{2018.09}{2022.06}  &
+  &
+  \textcolor{pink}{\textbf{BS in Geophysics}}, \Yangtz, Wuhan, China.\FixedRightSpace{2018.09 - 2022.06}
   \newline
-  GEA: 3.73/5.0, rank: 5/43
+  GPA: 3.73/5.0, rank: 4/43
   \newline
-  Concentrations: Principles of Seismic Exploration, General Geological Practice
-\end{EntriesTableDuration}
+  Courses: Principles of Seismic Exploration, General Geological Practice.
+  \newline
+  Thesis: Charactertics of MT signal based on remote reference station statistical analysis research; 
+  \newline
+  Advisor: Xinbing Xie.
+\end{EntriesTableDurationBack}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Publications}
+\section{\textcolor{purple}{Publication}}
 
 \begin{EntriesTableYear}
   \Year{2024} &
   \textbf{Underwater ERT method to image Karst cave distribution below the river water}.
   \newline
-  \Me, \DikunYang, \emph{et al}.
-  Seventh International Conference on Engineering Geophysics, AI Ain, UAE, 16-19 October 2023.
-  % \DOI{10.1190/iceg2023-0321.1}
-  doi:\href{https://library.seg.org/doi/10.1190/iceg2023-032.1}{10.1190/iceg2023-0321.1}
+  \Me, \DikunYang, \emph{et al},
+  (2024), SEG Global Meeting Abstracts : 139-142. %AI Ain, UAE, 16-19 October 2023.
+  DOI:\href{https://library.seg.org/doi/10.1190/iceg2023-032.1}{10.1190/iceg2023-0321.1}
   \\
-  \Year{2022} &
-  \textbf{Charactertics of MT signal based on remote reference station statistical analysis research}.
-  \newline
-  \Me, Xie,
-  Undergraduate Thesis; 
 \end{EntriesTableYear}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Research Experience}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\textcolor{purple}{Research Experience}}
 
-\begin{EntriesTableYear}
-  \Year{2024} &
-  \textbf{Investigation of the electrical structures of the Littoral Fault Zone in the South China Sea}.%Experiment of Nearshore Magnetotelluric (MT) Survey using Inter-station Impedance Method.} 
-  % \newline
+\begin{EntriesTableDurationBack}
+  &
+  \textbf{Comprehensive geophysical prospecting of geo-hazrds in the SUSTech campus}.\FixedRightSpace{2024.10 - on}
   \begin{itemize}[label={-}, leftmargin=*] % 使用 - 作为项目符号，leftmargin=* 使缩进与文本对齐
-    \item \textbf{Southern Marine Science and Engineering Guangdong laboratory(Zhuhai) supports this research}.
-    \item \textit{Contribute to designing schemes for shallow water Magnetotelluric(MT) surveys including underwater cable design, site evaluation}.
-    \item \textit{Acquisite MT signal both onshore and offshore using Phoneix system MTU-5A.}
+    % \item \textbf{Southern Marine Science and Engineering Guangdong laboratory(Zhuhai) supports this research}.
+    \item \textit{Leading teams through the entire process of Electric Resistivity Tomography (ERT) survey design, data acquisition, data processing, and data interpretation}.
+    \item \textit{Using the open Python package SimPEG process potential difference data to obtain conductivity cross-section}.
+    \item \textit{Participating in acquisition and processing seismic data from both active and passive sources using Smart seismic sensor IGU-16HR}.
+    \item \textit{Extracted dispersion curves from active sources using the Multi-channel Analysis of Surface Waves(MASW) method, including FK and LRT techniques, and from ambient noise using SPAC and F-K methods, then inverted these dispersion curves to obtain Vs structures}.
+    % \item \textit{Extract dispersion curves from ambient noise using SPAC and F-J methods and get Vs structures}.
+  \end{itemize}
+  \\
+  &
+  \textbf{Development of a Cloud-Based simulation platform for Direct Current Resistivity Imaging}.\FixedRightSpace{2024.10 - on}
+  \begin{itemize}[label={-}, leftmargin=*]
+    \item \textit{Simulation of electric potential distribution using the finite volume method}.
+    \item \textit{Designed a user-friendly interface with customizable parameters for professional use}.
+    \item \textit{Cloud-based deployment and out-of-the-box functions, secure and stable.}
+    \item \textit{In a short period of time, get the high-resolution underground electrical structure as well as iteration parameters, model parameters and so on}.
+  \end{itemize}
+  \\
+  &
+  \textbf{Experiment of nearshore magnetotelluric (MT) survey using inter-station impedance}.\FixedRightSpace{2024.10 - 2024.11}%Experiment of Nearshore Magnetotelluric (MT) Survey using Inter-station Impedance Method.} 
+  % \textit{}
+  \begin{itemize}[label={-}, leftmargin=*] % 使用 - 作为项目符号，leftmargin=* 使缩进与文本对齐
+    % \item \textbf{Southern Marine Science and Engineering Guangdong laboratory(Zhuhai) supports this research}.
+    \item \textit{Contribute to designing schemes for shallow water MT surveys including underwater cable design, site evaluation}.
+    \item \textit{Acquisite MT signal both onshore and offshore using Phoneix instrument MTU-5A.}
     \item \textit{Processing obtained inter-station time series and estimation of impedance by SSMT2000 and MTEditor.}
   \end{itemize}
   \\
   &
-  \textbf{3D Direct Current Forward Simulation.} 
-  \begin{itemize}[label={-}, leftmargin=*]
-    \item \textit{Finite volume method support simulation of surface potential distribution}.
-    \item \textit{A framework for direct current simulation in 2D and 3D}.
-    \item \textit{Deepen the understanding of ERT principle and improve the numerical model simulation ability.}
-  \end{itemize}
-  \\
-  \Year{2023} &
-  \textbf{Underwater ERT method to image Karst cave distribution below the river water}. 
+  \textbf{Underwater ERT method to image Karst cave distribution below the river water}.\FixedRightSpace{2023.02 - 2023.10}
+  \newline
+  Project from CCCC-FHDI Engineering Co., Ltd
   \begin{itemize}[label={-}, leftmargin=*] % 使用 - 作为项目符号，leftmargin=* 使缩进与文本对齐
-    \item \textbf{CCCC-FHDI Engineering Co., Ltd, supports this research}.
+    % \item \textbf{CCCC-FHDI Engineering Co., Ltd, supports this research}.
     \item \textit{As Karst caves were covered by river water with rapid flow, a specialized underwater cable and well-designed ERT measurements were adopted to obtain river bottom potential difference data}.
     \item \textit{2D inversion models incorporating riverbed terrain were obtained, successfully corresponding with existing borehole data.}
-    \item \textit{An oral report was presented at the 7th ICEG conference and a conference paper was published}.
+    % \item \textit{An oral report was presented at the 7th ICEG conference and a conference paper was published}.
   \end{itemize}
   \\
   &
-  \textbf{Image Karst cavities distribution using ERT and ANT method.} 
+  \textbf{Image Karst cavities distribution using ERT and ANT method.}\FixedRightSpace{2022.11 - 2023.02}
+  \newline
+  Project from Shenzhen Municipal Engineering Corp.
   \begin{itemize}[label={-}, leftmargin=*] 
-    \item \textbf{Shenzhen Municipal Engineering Corp supports this research}.
-    \item \textit{The spatial position of the cave was successfully located using the conductivity and velocity models.}
-    \item \textit{Using soft constraints, the resolution of the conductivity model was successfully improved by incorporating velocity structures}.
-    \item \textit{An oral report was presented at the IMAGE2023 conference}.
+    % \item \textit{Acquisition of ERT data and Seismic data in site and data processing}.
+    \item \textit{Acquired and processed ERT and seismic data on-site, successfully identifying the spatial position of the cave using conductivity and velocity models}.
+    \item \textit{By incorporating velocity structures as a new soft constraint, the resolution of the conductivity model was successfully improved}.
   \end{itemize}
   \\
-\end{EntriesTableYear}
+  &
+  \textbf{Cross-hole electrical resistivity tomography (CHERT) for monitoring DNAPL contamination.}\FixedRightSpace{2022.07 - 2022.11}
+  \begin{itemize}[label={-}, leftmargin=*] 
+    \item \textbf{Utilized a monitoring well as an electrode to transmit current}.
+    \item \textit{Acquired ERT data from both surface and well-based electrodes for comprehensive subsurface analysis}.
+    \item \textit{Mapped the direction and depth of pollutant dispersion by analyzing resistivity anomalies}.
+    % \item \textit{An oral report was presented at the IMAGE2023 conference}.
+  \end{itemize}
+\end{EntriesTableDurationBack}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Grants and Fellowships}
+\section{\textcolor{purple}{Awards and Fellowships}}
 
-\begin{EntriesTableDuration}
-  \Duration{2023}{10} &
-  The\textbf{ `third prize`} in the eighth National College Students "Innovation Cup" Geophysical Knowledge Competition(CNY 1000).\
+\begin{EntriesDate}
+  \OColon{2023.10} &
+  The \textbf{\textcolor{pink}{ `third prize`}} in the eighth National College Students "Innovation Cup" Geophysical Knowledge Competition (CNY 1000).\
   \href{https://newshub.sustech.edu.cn/html/202306/43985.html}{Newsreport}
   \\
-  \Duration{2021}{10} &
-  The\textbf{ `second prize`} in the seveth National College Students "Innovation Cup" Geophysical Knowledge Competition.
+  \OColon{2021.09} &
+  The \textbf{\textcolor{pink}{ `second prize`}} in the seveth National College Students "Innovation Cup" Geophysical Knowledge Competition.
   \\
-  \Duration{2019}{10} &
-  Win\textbf{ The National Encouragement Scholarship}(CNY 5000).
+  \OColon{2019.12} &
+  \textbf{\textcolor{pink}{The National Encouragement Scholarship}} (CNY 5000).
   \\
-\end{EntriesTableDuration}
+\end{EntriesDate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Presentation}
+\section{\textcolor{purple}{Presentation}}
 
-\begin{EntriesTableYear}
-  \Year{2024}  &
+\begin{EntriesDate}
+  \Year{2024.08}  &
   \textbf{Interpreting cross-river underwater electric resistivity data for dam construction: Lessons learned from 2D and 3D inversions}.
   \newline
-  \href{https://www.imageevent.org/}{IMAGE2024}; AUG. 28, 2024, Houston, Texas, USA;
-  \Me, \DikunYang.
+  \Me, \DikunYang,
+  \textit{The International Meeting for Applied Geoscience and Energy
+  \href{https://www.imageevent.org/}{ (IMAGE2024) }}, AUG. 28, 2024, Houston, Texas, USA.
   \\
-  &
+  \Year{2024.06} &
   \textbf{Development and Application of Joint Nodal Acquisition Stations for Seismic and ERT data}.
   \newline
-  \href{https://ess.sustech.edu.cn/iceeg2024/}{11th ICEEG}; Jun. 30, 2024, Shenzhen, China;
-  \Me, \DikunYang.
+  \Me, \DikunYang,
+  \textit{The 11th International Conference on Environmental and Engineering Geophysics
+  \href{https://ess.sustech.edu.cn/iceeg2024/}{ (11th ICEEG) }}, Jun. 30, 2024, Shenzhen, China.
   \\
-  \Year{2023}  &
+  \Year{2023.10}  &
   \textbf{Underwater ERT method to image Karst cave distribution below the river water}.
   \newline
-  \href{https://conferences.uaeu.ac.ae/iceg2023/en/}{7th ICEG}; Oct. 18, 2023, AI-Ain, UAE.
-  \Me, H. Chai,\DikunYang.
+  \Me, Haibing Chai,\DikunYang,
+  \textit{The Seventh International Conference on Engineering Geophysics
+  \href{https://conferences.uaeu.ac.ae/iceg2023/en/}{ (7th ICEG) }}, Oct. 18, 2023, AI-Ain, UAE.
   \\
-  &
+  \Year{2023.08} &
   \textbf{Electric resistivity tomography inversion guided by passive microtremor data for detection of karst cavities}.
   \newline
-  \href{https://www.imageevent.org/}{IMAGE2023}; Aug. 27, 2023, Houston, Texas, USA;
-  \Me, \DikunYang, \Zhengtao.
-\end{EntriesTableYear}
+  \Me, \DikunYang, \Zhentao,
+  \textit{The International Meeting for Applied Geoscience and Energy
+  \href{https://www.imageevent.org/}{ (IMAGE2023) }}, AUG. 27, 2023, Houston, Texas, USA.
+\end{EntriesDate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Language \& Skills}
+\section{\textcolor{purple}{Language \& Skills}}
 
 \begin{EntriesNote}
   \Colon{\textbf{Programming}} &
   Python, Matlab, Jekyll, Linux, Adobe(Ps, LR), etc.
   \\
   \Colon{\textbf{Softwares}} & 
-  SimPEG, MTU-5A, SSMT2000, SAC, SmartSolo softwares, Cartopy, disba, etc.
+  SimPEG, SSMT2000, SAC, Cartopy, disba, etc.
+  \\
+  \Colon{\textbf{Instrument}} &
+  SmartSolo Geophone, Phoneix system MTU-5A, Muti-channel electrical system GD-20, RTK, etc.
   \\
   \Colon{\textbf{Languages}} &
-  Mandarin (native), English(IELTS 9.0)
-  % \\
-  % \Colon{\textbf{Interests}} &
-  % \href{https://www.xiaohongshu.com/user/profile/}{Photography}, Volunteering(100+ hours)
-  % \\
+  Mandarin(native), English(IELTS 6.5).
+  \\
+  \Colon{\textbf{Geophysical skills}} &
+  ERT(Practical experience of the whole-process ERT survey); MT(Experience in data acquisition and data processing); surface wave(Filed practice and seismic data processing).
 \end{EntriesNote}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Geophysics Practicing}
-
-\begin{EntriesNote}
-  \Colon{\textbf{ERT}} &
-  \textbf{Specialized in using ERT to solve problems relevant to environmental contamination evaluation and geophysical engineering}.
-  \begin{itemize}[label={-}, leftmargin=*, after=\vspace{-8pt}]
-    \item \textit{Hands-on experience in leading teams through the entire process of ERT survey scheme design, data acquisition, data processing, and data interpretation}.
-    \item \textit{Experience in handling unconventional field work scenarios, such as underwater ERT investigations}.
-    \item \textit{Specialize in the processing of DC resistivity forward and inversion simulation in 2.5D and 3D using SimPEG.}
-  \end{itemize}
-  \\
-  \Colon{\textbf{Suface Wave}} &
-  \textbf{Experienced in using surface wave methods to investigate shallow subsurface issues, such as underground fractures}.
-  \begin{itemize}[label={-}, leftmargin=*, after=\vspace{-8pt}]
-    \item \textit{Possesses field practice experience and expertise in processing seismic data from both active and passive sources}.
-    \item \textit{Extract dispersion curves from active source using the Muti-channel analysis of surface wave (MASW) method, like(FK, LRT) and invert for Vs structures}.
-    \item \textit{Extract dispersion curves from ambient noise using SPAC and F-J methods and get Vs structures}.
-  \end{itemize}
-  \vspace{-50pt}
-  \\
-  \Colon{\textbf{\footnotesize Magnetotelluric}} &
-  \textbf{Familiar with MT survey and 2D inversion}.
-  \begin{itemize}[label={-}, leftmargin=*, after=\vspace{-5pt}]
-    \item \textit{Practical field experience and expertise in handling and processing MT data using Phoneix System}.
-    \item \textit{Experience in 2D MT inversion and uncertainty qualification}.
-  \end{itemize}
-\end{EntriesNote}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Interests}
+\section{\textcolor{purple}{Interests}}
 
 \begin{EntriesNote}
 \Colon{\textbf{Sports}} &
 Swimming, Hiking.
 \\
 \Colon{\textbf{Photography}} &
-  \href{https://www.xiaohongshu.com/user/profile/}{Photography Portfolio}  contains landscapes and emotions.
+  \href{https://www.xiaohongshu.com/user/profile/5f8ef7ff0000000001002b56}{Photography Portfolio}  contains landscapes and emotions.
 \\
 \Colon{\textbf{Volunteering}} &
-Volunteering(100+ hours), feel individual energy and zest for life first hand.
+Conference Volunteering(100+ hours), feel individual energy and zest for life first hand.
 
 \end{EntriesNote}
 

@@ -7,5 +7,5 @@ output/
 *.blg
 *.log
 *.out
-*.pdf
-about.md
+# *.pdf
+cv_duplicated.tex
